@@ -1,0 +1,1 @@
+{"nonTerminale":["S","NT1","NT2"],"terminale":["a"],"productii":[{"stanga":"S","dreapta":[["ε"],["a","NT1"]]},{"stanga":"NT1","dreapta":[["a"],["a","NT2"],["a","NT1"]]}],"simbolStart":"S"}

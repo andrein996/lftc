@@ -1,0 +1,1 @@
+{"stari":["q0","q1","q2"],"alfabet":["a"],"stareInitiala":"q0","stariFinale":["q2","q0"],"nodes":[{"start":"q0","end":"q1","value":"a"},{"start":"q1","end":"q2","value":"a"},{"start":"q1","end":"q1","value":"a"}]}

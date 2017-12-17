@@ -1,0 +1,11 @@
+{
+  "nonTerminale" : ["S"],
+  "terminale" : ["a", "b"],
+  "productii" : [
+    {
+      "stanga" : "S",
+      "dreapta" : [["a", "S"], ["b", "S"], ["b"]]
+    }
+  ],
+  "simbolStart" : "S"
+}
