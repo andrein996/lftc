@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Deque;
+import java.util.stream.Collectors;
 
 public class StateController {
 
@@ -91,12 +92,13 @@ public class StateController {
      * EXPANDARE
      */
     public void expandare() {
+        Production production = getProductions(getFirstInBandaDeIntrare()).get(0);
         List<String> stivaDeLucru = state.getStivaLucru();
-        stivaDeLucru.add(productii.get(0).getStanga() + "-" + 1);
+        stivaDeLucru.add(production.getStanga() + "-" + 1);
 
         Deque<String> bandaDeLucru = state.getBandaDeIntrare();
         bandaDeLucru.removeLast();
-        addProductie(0);
+        addProductie(production);
 
         addAndPrintState("expandare");
     }
@@ -158,18 +160,20 @@ public class StateController {
         }
 
         final Integer position = Integer.parseInt(strings.get(1));
+        final String nonTerminal = strings.get(0);
 
-        final Production production = productii.get(position - 1);
+        final Production production = getProductions(nonTerminal).get(position - 1);
         final int productionSizeToRight = production.getDreapta().size();
 
         removeFromBandaDeIntrare(productionSizeToRight);
         removeLastInStivaDeLucru();
 
         //daca exista A j+1 --> Gama j+1
-        if (position < productii.size()) {
+        if (position < getProductions(nonTerminal).size()) {
+            final Production nextProduction = getProductions(nonTerminal).get(position);
             final List<String> stivaDeLucru = state.getStivaLucru();
-            stivaDeLucru.add(productii.get(position).getStanga() + "-" + (position + 1));
-            addProductie(position);
+            stivaDeLucru.add(nextProduction.getStanga() + "-" + (position + 1));
+            addProductie(nextProduction);
             setStareQ();
         } else {
             Deque<String> bandaDeIntrare = state.getBandaDeIntrare();
@@ -200,11 +204,17 @@ public class StateController {
         return gramatica.getTerminale().contains(element);
     }
 
-    private void addProductie(Integer position) {
-        List<String> rightSide = productii.get(position).getDreapta();
+    private void addProductie(Production production) {
+        List<String> rightSide = production.getDreapta();
         Deque<String> bandaDeIntrare = state.getBandaDeIntrare();
 
         rightSide.forEach(bandaDeIntrare::add);
+    }
+
+    private List<Production> getProductions(String nonTerminal) {
+        return productii.stream()
+                .filter(production -> production.getStanga().equals(nonTerminal))
+                .collect(Collectors.toList());
     }
 
     public String getFirstInBandaDeIntrare() {

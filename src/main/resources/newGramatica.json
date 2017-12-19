@@ -1,0 +1,148 @@
+{
+  "nonTerminale": ["program", "declist", "compound_instr", "declaration", "type", "identifier", "primitive", "array",
+    "positive_number", "list_instr", "instr", "simple_instr", "compound_instr", "assignment", "const", "expression",
+    "op_p1", "term", "op_p2", "factor", "if_inst", "while_inst", "condition", "stmt", "else_inst", "primul_caracter",
+    "repetat_lc", "underscore", "letter", "litera_cifra", "digit", "digit_plus", "int", "cint", "positive_number", "relation"],
+  "terminale": ["int", "real", "boolean", "char", "string", "read", "write", "if", "else", "then", "while", "DECLARE",
+    "BEGIN", "END", "+", "-", "*", "\\", "=", "!=", "<", "<=", ">", ">=", ":=", "==", "(", ")", "{", "}", "[", "]", ";", ":",
+    " ", "$", "a", "b", "c", "d", "e", "f", "1", "2", "_"],
+  "productii": [
+    {
+      "stanga":"program",
+      "dreapta":[["DECLARE", "declist", "BEGIN", "compound_instr", "END"]]
+    },
+    {
+      "stanga":"declist",
+      "dreapta":[["declaration"], ["declaration",";","declist"]]
+    },
+    {
+      "stanga":"declaration",
+      "dreapta":[["identifier","=","type"]]
+    },
+    {
+      "stanga":"type",
+      "dreapta":[["primitive"],["array"]]
+    },
+    {
+      "stanga":"primitive",
+      "dreapta":[["int"],["real"],["boolean"],["char"]]
+    },
+    {
+      "stanga":"array",
+      "dreapta":[["[", "primitive", "]", ":", "[", "positive_number", "]"]]
+    },
+    {
+      "stanga":"compound_instr",
+      "dreapta":[["{", "list_instr", "}"]]
+    },
+    {
+      "stanga":"list_instr",
+      "dreapta":[["instr"],["instr", ";", "list_instr"]]
+    },
+    {
+      "stanga":"instr",
+      "dreapta":[["simple_instr"],["compound_instr"],["declaration"]]
+    },
+    {
+      "stanga":"simple_instr",
+      "dreapta":[["assignment"],["write", "$", "identifier"],["write","$","const"],["read","$","identifier"]]
+    },
+    {
+      "stanga":"assignment",
+      "dreapta":[["identifier",":=", "expression"]]
+    },
+    {
+      "stanga":"expression",
+      "dreapta":[["expression","op_p1","term"],["term"]]
+    },
+    {
+      "stanga":"term",
+      "dreapta":[["term","op_p2","factor"],["factor"]]
+    },
+    {
+      "stanga":"factor",
+      "dreapta":[["(","expression", ")"],["identifier"], ["const"]]
+    },
+    {
+      "stanga":"compound_instr",
+      "dreapta":[["if_inst"],["while_inst"]]
+    },
+    {
+      "stanga" : "if_inst",
+      "dreapta" : [["if", "condition", "then", "stmt"], ["if", "condition", "then", "stmt", "else_inst"]]
+    },
+    {
+      "stanga" : "else_inst",
+      "dreapta" : [["else", "stmt"], ["else", "stmt", "else_inst"]]
+    },
+    {
+      "stanga" : "condition",
+      "dreapta" : [["expression", "relation", "expression"]]
+    },
+    {
+      "stanga" : "stmt",
+      "dreapta" : [["simple_instr"], ["compound_instr"]]
+    },
+    {
+      "stanga" : "identifier",
+      "dreapta" : [["primul_caracter", "repetat_lc"], ["primul_caracter"]]
+    },
+    {
+      "stanga" : "primul_caracter",
+      "dreapta" : [["underscore"], ["letter"]]
+    },
+    {
+      "stanga" : "litera_cifra",
+      "dreapta" : [["letter"], ["digit"]]
+    },
+    {
+      "stanga" : "repetat_lc",
+      "dreapta" : [["litera_cifra"], ["litera_cifra", "repetat_lc"]]
+    },
+    {
+      "stanga" : "letter",
+      "dreapta" : [["a"], ["b"], ["c"], ["d"], ["e"], ["f"]]
+    },
+    {
+      "stanga" : "underscore",
+      "dreapta" : [["_"]]
+    },
+    {
+      "stanga" : "const",
+      "dreapta" : [["int"]]
+    },
+    {
+      "stanga" : "int",
+      "dreapta" : [["digit"], ["positive_number"], ["-", "positive_number"]]
+    },
+    {
+      "stanga" : "cint",
+      "dreapta" : [["digit"], ["digit", "cint"]]
+    },
+    {
+      "stanga" : "positive_number",
+      "dreapta" : [["digit_plus"], ["digit_plus", "cint"]]
+    },
+    {
+      "stanga" : "op_p1",
+      "dreapta" : [["+"], ["-"]]
+    },
+    {
+      "stanga" : "op_p2",
+      "dreapta" : [["*"], ["/"]]
+    },
+    {
+      "stanga" : "relation",
+      "dreapta" : [["=="], [">"], [">="], ["<"], ["<="], ["!="]]
+    },
+    {
+      "stanga" : "digit",
+      "dreapta" : [["0"], ["1"], ["2"], ["3"], ["4"], ["5"], ["6"], ["7"], ["8"], ["9"]]
+    },
+    {
+      "stanga" : "digit_plus",
+      "dreapta" : [["1"], ["2"], ["3"], ["4"], ["5"], ["6"], ["7"], ["8"], ["9"]]
+    }
+  ],
+  "simbolStart": "program"
+}

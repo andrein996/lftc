@@ -3,6 +3,7 @@ package com.ui;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gramatica.Gramatica;
 import com.gramatica.Productie;
+import com.sequence.Sequence;
 import com.service.Analyzer;
 
 import java.io.File;
@@ -26,6 +27,12 @@ public class UserInterface {
         byte[] bytes = Files.readAllBytes(new File(FILE_PATH + "gramatica.json").toPath());
 
         gramatica = MAPPER.readValue(bytes, Gramatica.class);
+    }
+
+    private Sequence readSequence() throws IOException {
+        byte[] bytes = Files.readAllBytes(new File(FILE_PATH + "sequence.json").toPath());
+
+        return MAPPER.readValue(bytes, Sequence.class);
     }
 
     private void writeGramatica(Gramatica gramatica) throws IOException {
@@ -58,6 +65,8 @@ public class UserInterface {
             readGramatica();
             //printGramatica(gramatica);
 
+            //Sequence secventa = readSequence();
+
             Analyzer analyzer = new Analyzer(gramatica);
 
             printMenu();
@@ -68,9 +77,10 @@ public class UserInterface {
                 System.out.println("Nu apartine gramaticii");
             }
 
-            if (sequence.length() == 0) {
-                break;
-            }
+//            if (sequence.length() == 0) {
+//                break;
+//            }
+            break;
         }
     }
 }
